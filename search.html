@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>جست‌وجو</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">کنز</div>
+    <button class="menu-toggle">☰</button>
+    <nav class="site-nav">
+      <a href="index.html">خانه</a>
+      <a href="dashboard.html">داشبورد</a>
+      <a href="search.html">جست‌وجو</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>جست‌وجوی مطالب</h2>
+      <input id="query" class="input" type="search" placeholder="نمونه سوالات علوم 3">
+      <button id="go" class="btn">جست‌وجو</button>
+      <ul id="results" class="news-list" style="margin-top:1rem;"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="copy">© 2025 کنز</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    async function search() {
+      const q = (document.getElementById('query').value || '').trim();
+      const results = document.getElementById('results');
+      results.innerHTML = '';
+      if (!q) return;
+
+      try {
+        const res = await fetch('data/content.json');
+        const items = await res.json();
+        const found = items.filter(x =>
+          (x.title + ' ' + x.tags.join(' ') + ' ' + x.desc).includes(q)
+        );
+        if (found.length === 0) {
+          results.innerHTML = '<li class="news-item"><p>چیزی پیدا نشد.</p></li>';
+        } else {
+          found.slice(0, 20).forEach(x => {
+            const li = document.createElement('li');
+            li.className = 'news-item';
+            li.innerHTML = <h4>${x.title}</h4><p>${x.desc}</p><a class="btn" href="${x.link}">مشاهده</a>;
+            results.appendChild(li);
+          });
+        }
+      } catch {
+        results.innerHTML = '<li class="news-item"><p>خطا در بارگذاری داده‌ها.</p></li>';
+      }
+    }
+    document.getElementById('go').addEventListener('click', search);
+    document.getElementById('query').addEventListener('keydown', e => e.key === 'Enter' && search());
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>داشبورد نخبگان</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">کنز</div>
+    <button class="menu-toggle">☰</button>
+    <nav class="site-nav">
+      <a href="index.html">خانه</a>
+      <a href="dashboard.html">داشبورد</a>
+      <a href="search.html">جست‌وجو</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>نمودار پیشرفت دروس</h2>
+      <div class="grid">
+        <canvas id="chart-science"></canvas>
+        <canvas id="chart-math"></canvas>
+        <canvas id="chart-physics"></canvas>
+        <canvas id="chart-chemistry"></canvas>
+        <canvas id="chart-biology"></canvas>
+        <canvas id="chart-persian"></canvas>
+      </div>
+    </section>
+
+    <section>
+      <h2>وضعیت مطالعات</h2>
+      <div class="grid cards">
+        <div class="card"><h3>جزوه‌های خوانده شده</h3><p id="stat-notes">—</p></div>
+        <div class="card"><h3>آزمون‌های شرکت‌کرده</h3><p id="stat-exams">—</p></div>
+        <div class="card"><h3>میانگین درصد</h3><p id="stat-average">—</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="copy">© 2025 کنز</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="progress.js"></script>
+</body>
+</html>
